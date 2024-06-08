@@ -19,7 +19,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     '/': {
       lang: 'zh-CN',
       title: "Friedy's blog",
-      description: '前后端知识库。',
+      description: '个人知识库。',
     }
   },
   // base: '/', // 默认'/'。如果你想将你的网站部署到如 https://foo.github.io/bar/，那么 base 应该被设置成 "/bar/",（否则页面将失去样式等文件）
@@ -34,40 +34,37 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         link: '/web/', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
         items: [
           // 说明：以下所有link的值只是在相应md文件头部定义的永久链接（不是什么特殊编码）。另外，注意结尾是有斜杠的
-          {
-            text: '前端文章',
-            items: [
-              { text: 'JavaScript', link: '/pages/8143cc480faf9a11/' },
-            ],
-          },
-          {
-            text: '学习笔记',
-            items: [
-            ],
-          },
+          {text: '《vue》笔记', link: '/web/vue/',},
+          {text: '《JavaScript教程》笔记', link: '/web/javascript/',},
+          {text: '小程序笔记', link: '/web/wxmini/',},
+
         ],
       },
       {
         text: '后端',
-        link: '/ui/',
+        link: '/back/',
         items: [
+          { text: '《Java》笔记', link: '/back/java/' },
+          { text: '《SpringBoot》笔记', link: '/back/springboot/' },
+          { text: '《SpringCloud》笔记', link: '/back/springcloud/' },
+          { text: '《Mybatis》笔记', link: '/back/mybatis/' },
+          { text: '《MySQL》笔记', link: '/back/mysql/' },
         ],
       },
       {
         text: '技术',
-        link: '/technology/',
+        link: '/tec/',
         items: [
-          { text: '技术文档', link: '/pages/9a7ee40fc232253e/' },
-          { text: 'GitHub技巧', link: '/pages/4c778760be26d8b3/' },
-          { text: '博客搭建', link: '/pages/41f87d890d0a02af/' },
+          { text: '《Git》笔记', link: '/tec/git/' },
+          { text: 'GitHub技巧', link: '/tec/github/' },
+          { text: '技术文档', link: '/tec/tecdocs/' },
         ],
       },
       {
         text: '更多',
         link: '/more/',
         items: [
-          { text: '学习', link: '/pages/f2a556/' },
-          { text: '面试', link: '/pages/aea6571b7a8bae86/' },
+          { text: '面试经验', link: '/more/interview/' },
           { text: '友情链接', link: '/friends/' },
         ],
       },
@@ -75,11 +72,9 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       {
         text: '收藏',
         link: '/pages/beb6c0bd8a66cea6/',
-        // items: [
-        //   { text: '网站', link: '/pages/beb6c0bd8a66cea6/' },
-        //   { text: '资源', link: '/pages/eee83a9211a70f9d/' },
-        //   { text: 'Vue资源', link: '/pages/12df8ace52d493f6/' },
-        // ],
+        items: [
+          { text: '网站', link: '/pages/beb6c0bd8a66cea6/' },
+        ],
       },
       {
         text: '索引',
@@ -93,7 +88,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     ],
     sidebarDepth: 2, // 侧边栏显示深度，默认1，最大2（显示到h3标题）
     logo: '/img/logo.png', // 导航栏logo
-    repo: 'friedy37/vuepress-theme-vdoing', // 导航栏右侧生成Github链接
+    repo: 'friedy37/friedy37.github.io', // 导航栏右侧生成Github链接
     searchMaxSuggestions: 10, // 搜索结果显示最大数
     lastUpdated: '上次更新', // 开启更新时间，并配置前缀文字   string | boolean (取值为git提交时间)
     docsDir: 'docs', // 编辑的文件夹
@@ -146,7 +141,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
 
     // 博主信息 (显示在首页侧边栏)
     blogger: {
-      avatar: 'https://jsd.cdn.zzko.cn/gh/xugaoyi/image_store/blog/20200103123203.jpg',
+      avatar: 'https://jsd.cdn.zzko.cn/gh/friedy37/picgo/127.jpeg',
       name: 'Friedy',
       slogan: '全栈攻城狮',
     },
@@ -199,7 +194,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       'meta',
       {
         name: 'keywords',
-        content: '前端博客,个人技术博客,前端,前端开发,前端框架,web前端,前端面试题,技术文档,学习,面试,JavaScript,js,ES6,TypeScript,vue,python,css3,html5,Node,git,github,markdown',
+        content: '个人知识库,web前端,后端开发,技术文档,面试题',
       },
     ],
     ['meta', { name: 'baidu-site-verification', content: '7F55weZDDc' }], // 百度统计的站长验证（你可以去掉）
