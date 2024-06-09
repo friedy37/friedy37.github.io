@@ -34,39 +34,40 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         link: '/web/', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
         items: [
           // 说明：以下所有link的值只是在相应md文件头部定义的永久链接（不是什么特殊编码）。另外，注意结尾是有斜杠的
-          {text: '《vue》笔记', link: '/web/vue/'},
+          {text: '《Vue》笔记', link: '/web/vue/'},
           {text: '《JavaScript教程》笔记', link: '/web/javascript/'},
           {text: '小程序笔记', link: '/web/wxmini/'},
-
+          {text: '《CSS》笔记', link: '/web/css/'},
+          {text: '《HTML》笔记', link: '/web/html/'},
         ],
       },
       {
         text: '后端',
         link: '/back/',
         items: [
-          { text: '《Java》笔记', link: '/back/java/' },
-          { text: '《SpringBoot》笔记', link: '/back/springboot/' },
-          { text: '《SpringCloud》笔记', link: '/back/springcloud/' },
+          { text: '《Java》笔记', link: '/back/java/'},
+          { text: '《SpringBoot》笔记', link: '/back/springboot/'},
+          { text: '《SpringCloud》笔记', link: '/back/springcloud/'},
         ],
       },
       {
         text: '技术',
         link: '/tec/',
         items: [
-          { text: '《Git》笔记', link: '/tec/git/' },
-          { text: 'GitHub技巧', link: '/tec/github/' },
-          { text: '技术文档', link: '/tec/tecdocs/' },
+          { text: '《Git》笔记', link: '/tec/git/'},
+          { text: 'GitHub技巧', link: '/tec/github/'},
+          { text: '技术文档', link: '/tec/tecdocs/'},
         ],
       },
       {
         text: '更多',
         link: '/more/',
         items: [
-          { text: '面试经验', link: '/more/interview/' },
-          { text: '友情链接', link: '/friends/' },
+          { text: '面试经验', link: '/more/interview/'},
+          { text: '友情链接', link: '/friends/'},
         ],
       },
-      { text: '关于', link: '/about/' },
+      { text: '关于', link: '/about/'},
       {
         text: '收藏',
         link: '/pages/beb6c0bd8a66cea6/',
