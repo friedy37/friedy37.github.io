@@ -34,9 +34,9 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         link: '/web/', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
         items: [
           // 说明：以下所有link的值只是在相应md文件头部定义的永久链接（不是什么特殊编码）。另外，注意结尾是有斜杠的
-          {text: '《vue》笔记', link: '/web/vue/',},
-          {text: '《JavaScript教程》笔记', link: '/web/javascript/',},
-          {text: '小程序笔记', link: '/web/wxmini/',},
+          {text: '《vue》笔记', link: '/web/vue/'},
+          {text: '《JavaScript教程》笔记', link: '/web/javascript/'},
+          {text: '小程序笔记', link: '/web/wxmini/'},
 
         ],
       },
@@ -47,8 +47,6 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
           { text: '《Java》笔记', link: '/back/java/' },
           { text: '《SpringBoot》笔记', link: '/back/springboot/' },
           { text: '《SpringCloud》笔记', link: '/back/springcloud/' },
-          { text: '《Mybatis》笔记', link: '/back/mybatis/' },
-          { text: '《MySQL》笔记', link: '/back/mysql/' },
         ],
       },
       {
@@ -153,7 +151,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         {
           iconClass: 'icon-youjian',
           title: '发邮件',
-          link: 'mailto:894072666@qq.com',
+          link: 'mailto:276970215@qq.com',
         },
         {
           iconClass: 'icon-github',
@@ -163,7 +161,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         {
           iconClass: 'icon-erji',
           title: '听音乐',
-          link: 'https://music.163.com/#/playlist?id=755597173',
+          link: 'https://music.163.com/',
         },
       ],
     },
@@ -301,8 +299,8 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
           clientID: 'a6e1355287947096b88b',
           clientSecret: 'f0e77d070fabfcd5af95bebb82b2d574d7248d71',
           repo: 'blog-gitalk-comment', // GitHub 仓库
-          owner: 'friedy37', // GitHub仓库所有者
-          admin: ['friedy37'], // 对仓库有写权限的人
+          owner: 'xugaoyi', // GitHub仓库所有者
+          admin: ['xugaoyi'], // 对仓库有写权限的人
           // distractionFreeMode: true,
           pagerDirection: 'last', // 'first'正序 | 'last'倒序
           id: '<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>', //  页面的唯一标识,长度不能超过50

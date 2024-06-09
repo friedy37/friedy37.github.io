@@ -1,0 +1,384 @@
+---
+title: 05Hystrix：断路器
+date: 2024-06-08 18:25:27
+permalink: /pages/417a3f/
+categories:
+  - 《SpringCloud》笔记
+tags:
+  - SpringCloud
+author: 
+  name: friedy37
+  link: https://github.com/friedy37
+---
+## 5. Hystrix：断路器
+
+### 5.1 雪崩效应
+
+分布式系统环境下，服务间类似依赖非常常见，一个业务调用通常依赖多个基础服务。
+
+多个微服务之间调用的时候，假设微服务 A 调用微服务 B 和微服务 C，微服务 B 和微服务 C 又调用其他的微服务，这就是所谓的 “扇出”，**如果扇出的链路上某个微服务的调用响应时间过长，或者不可用，而此时有大批量请求服务 A 时，最终可能导致整个服务资源耗尽，无法继续对外提供服务**，这就是所谓的 “**雪崩效应**”。
+
+![](https://img-blog.csdnimg.cn/20210425211534172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70)  
+**雪崩效应常见场景**
+
+*   硬件故障：如服务器宕机，机房断电，光纤被挖断等。
+*   流量激增：如异常流量，重试加大流量等。
+*   缓存穿透：一般发生在应用重启，所有缓存失效时，以及短时间内大量缓存失效时。大量的缓存不命中，使请求直击后端服务，造成服务提供者超负荷运行，引起服务不可用。
+*   程序 BUG：如程序逻辑导致内存泄漏，JVM 长时间 FullGC 等。
+*   同步等待：服务间采用同步调用模式，同步等待造成的资源耗尽。
+
+**雪崩效应应对策略**
+
+针对造成雪崩效应的不同场景，可以使用不同的应对策略，没有一种通用所有场景的策略，参考如下：
+
+*   硬件故障：多机房容灾、异地多活等。
+*   流量激增：服务自动扩容、流量控制（限流、关闭重试）等。
+*   缓存穿透：缓存预加载、缓存异步加载等。
+*   程序 BUG：修改程序 bug、及时释放资源等。
+*   同步等待：资源隔离、MQ 解耦、不可用服务调用快速失败等。资源隔离通常指不同服务调用采用不同的线程池；不可用服务调用快速失败一般通过熔断器模式结合超时机制实现。
+
+综上所述，如果一个应用不能对来自依赖的故障进行隔离，那该应用本身就处在被拖垮的风险中。 因此，**为了构建稳定、可靠的分布式系统，我们的服务应当具有自我保护能力，当依赖服务不可用时，当前服务启动自我保护功能，必要时进行弃车保帅，从而避免发生雪崩效应。**
+
+### 5.2 Hystrix
+
+Hystrix [hɪst’rɪks]，中文含义是豪猪，因其背上长满棘刺，从而拥有了自我保护的能力。
+
+ Hystrix 是一个应用于处理分布式系统的延迟和容错的开源库，在分布式系统里，许多依赖不可避免的会调用失败，比如超时，异常等，**Hystrix 能够保证在一个依赖出问题的情况下，不会导致整个体系服务失败，避免级联故障，以提高分布式系统的弹性。**
+
+**​ “断路器”** 本身是一种开关装置，当某个服务单元发生故障之后，通过断路器的故障监控 (类似熔断保险丝) ，**向调用方返回一个服务预期的，可处理的备选响应 (FallBack) ，而不是长时间的等待或者抛出调用方法无法处理的异常，这样就可以保证了服务调用方的线程不会被长时间，不必要的占用**，从而避免了故障在分布式系统中的蔓延，乃至雪崩。  
+![](https://img-blog.csdnimg.cn/20210425212716819.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70)
+
+### 5.3 服务熔断
+
+**当扇出链路的某个微服务不可用或者响应时间太长时，会进行服务的熔断**，熔断该节点微服务的调用，快速返回错误的响应信息。检测到该节点微服务调用响应正常后恢复调用链路。在 SpringCloud 框架里熔断机制通过 Hystrix 实现。Hystrix 会监控微服务间调用的状况，当失败的调用到一定阀值缺省是 5 秒内 20 次调用失败，就会启动熔断机制。熔断机制的注解是：@HystrixCommand。
+
+案例：  
+新建 springcloud-provider-dept-hystrix-8001 模块并拷贝 springcloud-provider-dept–8001 内的 pom.xml、resource 和 Java 代码进行初始化并调整。
+
+导入 hystrix 依赖
+
+```
+<!--导入Hystrix依赖-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-hystrix</artifactId>
+    <version>1.4.6.RELEASE</version>
+</dependency>
+```
+
+调整 yml 配置文件
+
+```
+server:
+  port: 8001
+
+# mybatis配置
+mybatis:
+  # springcloud-api 模块下的pojo包
+  type-aliases-package: com.haust.springcloud.pojo
+  # 本模块下的mybatis-config.xml核心配置文件类路径
+  config-location: classpath:mybatis/mybatis-config.xml
+  # 本模块下的mapper配置文件类路径
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+# spring配置
+spring:
+  application:
+    #项目名
+    name: springcloud-provider-dept
+  datasource:
+    # 德鲁伊数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db01?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+
+# Eureka配置：配置服务注册中心地址
+eureka:
+  client:
+    service-url:
+      # 注册中心地址7001-7003
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: springcloud-provider-dept-hystrix-8001 #修改Eureka上的默认描述信息
+    prefer-ip-address: true #改为true后默认显示的是ip地址而不再是localhost
+
+#info配置
+info:
+  app.name: kuang-springcloud #项目的名称
+  company.name: com.haust #阿里巴巴有限公司
+```
+
+修改 controller
+
+```
+@RestController
+public class DeptController {
+
+    @Autowired
+    private DeptService deptService;
+
+    /**
+     * 根据id查询部门信息
+     * 如果根据id查询出现异常,则走hystrixGet这段备选代码
+     * @param id
+     * @return
+     */
+    @HystrixCommand(fallbackMethod = "hystrixGet")
+    @RequestMapping("/dept/get/{id}")//根据id查询
+    public Dept get(@PathVariable("id") Long id){
+        Dept dept = deptService.queryById(id);
+        if (dept==null){
+            throw new RuntimeException("这个id=>"+id+",不存在该用户，或信息无法找到~");
+        }
+        return dept;
+    }
+
+    /**
+     * 根据id查询备选方案(熔断)
+     * @param id
+     * @return
+     */
+    public Dept hystrixGet(@PathVariable("id") Long id){
+        return new Dept().setDeptno(id)
+                .setDname("这个id=>"+id+",没有对应的信息,null---@Hystrix~")
+                .setDb_source("在MySQL中没有这个数据库");
+    }
+}
+```
+
+为主启动类添加对熔断的支持注解 @EnableCircuitBreaker
+
+```
+@SpringBootApplication
+@EnableEurekaClient // EnableEurekaClient 客户端的启动类，在服务启动后自动向注册中心注册服务
+@EnableDiscoveryClient // 服务发现~
+@EnableCircuitBreaker // 添加对熔断的支持注解
+public class HystrixDeptProvider_8001 {
+    public static void main(String[] args) {
+        SpringApplication.run(HystrixDeptProvider_8001.class,args);
+    }
+}
+```
+
+测试：访问一个不存在的 id  
+![](https://img-blog.csdnimg.cn/20210425215433563.png)
+
+### 5.4 服务降级
+
+服务降级是指 当服务器压力剧增的情况下，根据实际业务情况及流量，对一些服务和页面有策略的不处理，或换种简单的方式处理，从而释放服务器资源以保证核心业务正常运作或高效运作。说白了，**就是尽可能的把系统资源让给优先级高的服务。**
+
+资源有限，而请求是无限的。如果在并发高峰期，不做服务降级处理，一方面肯定会影响整体服务的性能，严重的话可能会导致宕机某些重要的服务不可用。所以，一般在高峰期，为了保证核心功能服务的可用性，都要对某些服务降级处理。比如当双 11 活动时，把交易无关的服务统统降级，如查看蚂蚁深林，查看历史订单等等。
+
+服务降级主要用于什么场景呢？当整个微服务架构整体的负载超出了预设的上限阈值或即将到来的流量预计将会超过预设的阈值时，为了保证重要或基本的服务能正常运行，可以将一些 不重要 或 不紧急 的服务或任务进行服务的 延迟使用 或 暂停使用。
+
+降级的方式可以根据业务来，可以延迟服务，比如延迟给用户增加积分，只是放到一个缓存中，等服务平稳之后再执行 ；或者在粒度范围内关闭服务，比如关闭相关文章的推荐。  
+![](https://img-blog.csdnimg.cn/20210425220847694.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70)
+
+由上图可得，**当某一时间内服务 A 的访问量暴增，而 B 和 C 的访问量较少，为了缓解 A 服务的压力，这时候需要 B 和 C 暂时关闭一些服务功能，去承担 A 的部分服务，从而为 A 分担压力，叫做服务降级。**
+
+**服务降级需要考虑的问题**
+
+*   1）那些服务是核心服务，哪些服务是非核心服务
+*   2）那些服务可以支持降级，那些服务不能支持降级，降级策略是什么
+*   3）除服务降级之外是否存在更复杂的业务放通场景，策略是什么？
+
+**自动降级分类**  
+1）超时降级：主要配置好超时时间和超时重试次数和机制，并使用异步机制探测回复情况
+
+2）失败次数降级：主要是一些不稳定的 api，当失败调用次数达到一定阀值自动降级，同样要使用异步机制探测回复情况
+
+3）故障降级：比如要调用的远程服务挂掉了（网络故障、DNS 故障、http 服务返回错误的状态码、rpc 服务抛出异常），则可以直接降级。降级后的处理方案有：默认值（比如库存服务挂了，返回默认现货）、兜底数据（比如广告挂了，返回提前准备好的一些静态页面）、缓存（之前暂存的一些缓存数据）
+
+4）限流降级：秒杀或者抢购一些限购商品时，此时可能会因为访问量太大而导致系统崩溃，此时会使用限流来进行限制访问量，当达到限流阀值，后续请求会被降级；降级后的处理方案可以是：排队页面（将用户导流到排队页面等一会重试）、无货（直接告知用户没货了）、错误页（如活动太火爆了，稍后重试）。
+
+案例：  
+在 springcloud-api 模块下的 service 包中新建降级配置类 DeptClientServiceFallBackFactory.java
+
+```
+@Component
+public class DeptClientServiceFallBackFactory implements FallbackFactory {
+
+    @Override
+    public DeptClientService create(Throwable cause) {
+        return new DeptClientService() {
+            @Override
+            public Dept queryById(Long id) {
+                return new Dept()
+                        .setDeptno(id)
+                        .setDname("id=>" + id + "没有对应的信息，客户端提供了降级的信息，这个服务现在已经被关闭")
+                        .setDb_source("没有数据~");
+            }
+            @Override
+            public List<Dept> queryAll() {
+                return null;
+            }
+
+            @Override
+            public Boolean addDept(Dept dept) {
+                return false;
+            }
+        };
+    }
+}
+```
+
+在 DeptClientService 中指定降级配置类 DeptClientServiceFallBackFactory
+
+```
+@Component //注册到spring容器中
+//@FeignClient:微服务客户端注解,value:指定微服务的名字,这样就可以使Feign客户端直接找到对应的微服务
+@FeignClient(value = "SPRINGCLOUD-PROVIDER-DEPT",fallbackFactory = DeptClientServiceFallBackFactory.class)//fallbackFactory指定降级配置类
+public interface DeptClientService {
+
+    @GetMapping("/dept/get/{id}")
+    public Dept queryById(@PathVariable("id") Long id);
+
+    @GetMapping("/dept/list")
+    public List<Dept> queryAll();
+
+    @GetMapping("/dept/add")
+    public Boolean addDept(Dept dept);
+}
+```
+
+在 springcloud-consumer-dept-feign 模块中开启降级：
+
+```
+server:
+  port: 80
+
+# Eureka配置
+eureka:
+  client:
+    register-with-eureka: false # 不向 Eureka注册自己
+    service-url: # 从三个注册中心中随机取一个去访问
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+# 开启降级feign.hystrix
+feign:
+  hystrix:
+    enabled: true
+```
+
+测试：打开注册中心，1 个服务提供者，1 个服务消费者  
+正常访问是没问题的，现在模拟关闭服务提供者，看结果  
+![](https://img-blog.csdnimg.cn/20210425221159310.png)
+
+### 5.5 服务熔断和降级的区别
+
+<table><tbody><tr><th width="50px">不同点</th><th width="100px">服务熔断</th><th width="100px">服务降级</th></tr><tr><td>概念</td><td>某个服务超时或异常，引起熔断，类似于保险丝 (自我熔断)</td><td>从整体网站请求负载考虑，当某个服务熔断或者关闭之后，服务将不再被调用，此时在客户端，我们可以准备一个 FallBackFactory ，返回一个默认的值 (缺省值)。会导致整体的服务下降，但是好歹能用，比直接挂掉强</td></tr><tr><td>触发原因</td><td>服务熔断一般是某个服务（下游服务）故障引起</td><td>服务降级一般是从整体负荷考虑</td></tr><tr><td>管理目标的层次</td><td>熔断其实是一个框架级的处理，每个微服务都需要（无层级之分）</td><td>降级一般需要对业务有层级之分（比如降级一般是从最外围服务开始）</td></tr><tr><td>实现方式</td><td>熔断一般称为自我熔断</td><td>服务降级具有代码侵入性 (由控制器完成 / 或自动降级)</td></tr></tbody></table>
+
+**熔断，降级，限流：**
+
+限流：限制并发的请求访问量，超过阈值则拒绝；
+
+降级：服务分优先级，牺牲非核心服务（不可用），保证核心服务稳定；从整体负荷考虑；
+
+熔断：依赖的下游服务故障触发熔断，避免引发本系统崩溃；系统自动执行和恢复
+
+### 5.6 Dashboard 流监控
+
+新建 springcloud-consumer-hystrix-dashboard 模块
+
+```
+<!--Hystrix依赖-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-hystrix</artifactId>
+    <version>1.4.6.RELEASE</version>
+</dependency>
+<!--dashboard依赖-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+    <version>1.4.6.RELEASE</version>
+</dependency>
+<!--Ribbon-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-ribbon</artifactId>
+    <version>1.4.6.RELEASE</version>
+</dependency>
+<!--Eureka-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-eureka</artifactId>
+    <version>1.4.6.RELEASE</version>
+</dependency>
+<!--实体类+web-->
+<dependency>
+    <groupId>com.haust</groupId>
+    <artifactId>springcloud-api</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<!--热部署-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+</dependency>
+```
+
+主启动类
+
+```
+@SpringBootApplication
+// 开启Dashboard
+@EnableHystrixDashboard
+public class DeptConsumerDashboard_9001 {
+    public static void main(String[] args) {
+        SpringApplication.run(DeptConsumerDashboard_9001.class,args);
+    }
+}
+```
+
+给 springcloud-provider-dept-hystrix-8001 模块下的主启动类添加如下代码, 添加监控
+
+```
+@SpringBootApplication
+@EnableEurekaClient //EnableEurekaClient 客户端的启动类，在服务启动后自动向注册中心注册服务
+public class DeptProvider_8001 {
+    public static void main(String[] args) {
+        SpringApplication.run(DeptProvider_8001.class,args);
+    }
+
+    //增加一个 Servlet
+    @Bean
+    public ServletRegistrationBean hystrixMetricsStreamServlet(){
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new HystrixMetricsStreamServlet());
+        //访问该页面就是监控页面
+        registrationBean.addUrlMappings("/actuator/hystrix.stream");
+       
+        return registrationBean;
+    }
+}
+```
+
+访问：http://localhost:9001/hystrix  
+![](https://img-blog.csdnimg.cn/20210425230159342.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70)  
+消费者模块，导入依赖
+
+```
+<!--Feign的依赖-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-feign</artifactId>
+    <version>1.4.6.RELEASE</version>
+</dependency>
+<!--监控的依赖-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+访问：http://localhost:8001/actuator/hystrix.stream  
+![](https://img-blog.csdnimg.cn/20210425230511534.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70)  
+然后进入监控画面  
+![](https://img-blog.csdnimg.cn/20210425230532568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70)  
+![](https://img-blog.csdnimg.cn/20210425230541624.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70)

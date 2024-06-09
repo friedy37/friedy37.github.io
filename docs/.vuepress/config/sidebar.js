@@ -4,7 +4,7 @@
 module.exports = {
   '/01.前端/': [
     {
-      title: 'JavaScript',
+      title: '',
       collapsable: false, //是否可折叠，可选的，默认true
       children: [
       ]
@@ -12,7 +12,7 @@ module.exports = {
   ],
   '/02.后端/': [
     {
-      title: 'html-css',
+      title: '',
       collapsable: false,
       children: [
       ]
@@ -20,7 +20,7 @@ module.exports = {
   ],
   '/03.技术/': [
     {
-      title: '技术',
+      title: '',
       collapsable: false, //是否可折叠，可选的，默认true
       sidebarDepth: 2, // 深度，可选的, 默认值是 1
       children: [
@@ -29,7 +29,7 @@ module.exports = {
   ],
   '/04.其他/': [
     {
-      title: '学习',
+      title: '',
       collapsable: false,
       children: [
         ['01.学习/01.学习网站','学习网站'],
