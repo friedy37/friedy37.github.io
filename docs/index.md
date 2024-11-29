@@ -16,7 +16,7 @@ features: # 可选的
     details: 
     link: /back/
     imgUrl: /img/back.png
-  - title: 技术
+  - title: 智算
     details: 
     link: /tec/
     imgUrl: /img/other.png

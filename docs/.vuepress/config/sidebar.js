@@ -18,7 +18,7 @@ module.exports = {
       ]
     },
   ],
-  '/03.技术/': [
+  '/03.智算/': [
     {
       title: '',
       collapsable: false, //是否可折叠，可选的，默认true

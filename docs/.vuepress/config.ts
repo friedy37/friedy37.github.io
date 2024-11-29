@@ -51,7 +51,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         ],
       },
       {
-        text: '技术',
+        text: '智算',
         link: '/tec/',
         items: [
           { text: '《Git》笔记', link: '/tec/git/'},
