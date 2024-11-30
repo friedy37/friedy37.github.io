@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ribbon：负载均衡（基于客户端） | Friedy&#39;s blog</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/img/favicon.ico">
+    <meta name="description" content="个人知识库。">
+    <meta name="keywords" content="个人知识库,web前端,后端开发,技术文档,面试题">
+    <meta name="baidu-site-verification" content="7F55weZDDc">
+    <meta name="theme-color" content="#11a8cd">
+    
+    <link rel="preload" href="/assets/css/0.styles.6a41b040.css" as="style"><link rel="preload" href="/assets/js/app.a9f1a96e.js" as="script"><link rel="preload" href="/assets/js/2.ef8d47f0.js" as="script"><link rel="preload" href="/assets/js/97.e79a48f3.js" as="script"><link rel="prefetch" href="/assets/js/10.c79a4c82.js"><link rel="prefetch" href="/assets/js/100.2b9b5aae.js"><link rel="prefetch" href="/assets/js/101.0995c564.js"><link rel="prefetch" href="/assets/js/102.b8dd509e.js"><link rel="prefetch" href="/assets/js/103.4f8e3ec3.js"><link rel="prefetch" href="/assets/js/104.5826f530.js"><link rel="prefetch" href="/assets/js/105.c968d1cd.js"><link rel="prefetch" href="/assets/js/106.07bd99ac.js"><link rel="prefetch" href="/assets/js/107.a34ae64f.js"><link rel="prefetch" href="/assets/js/108.04fdc420.js"><link rel="prefetch" href="/assets/js/109.42c6a43b.js"><link rel="prefetch" href="/assets/js/11.d42eacc2.js"><link rel="prefetch" href="/assets/js/110.20d9f70a.js"><link rel="prefetch" href="/assets/js/111.ea8445ef.js"><link rel="prefetch" href="/assets/js/112.b1079e60.js"><link rel="prefetch" href="/assets/js/113.01d3566d.js"><link rel="prefetch" href="/assets/js/114.4a3ff96d.js"><link rel="prefetch" href="/assets/js/115.a55f1a44.js"><link rel="prefetch" href="/assets/js/116.05bbe242.js"><link rel="prefetch" href="/assets/js/117.76d0d18d.js"><link rel="prefetch" href="/assets/js/118.fa8edad4.js"><link rel="prefetch" href="/assets/js/119.db84394d.js"><link rel="prefetch" href="/assets/js/12.841b4079.js"><link rel="prefetch" href="/assets/js/120.0bae7ee3.js"><link rel="prefetch" href="/assets/js/121.649fd022.js"><link rel="prefetch" href="/assets/js/122.92fbaf46.js"><link rel="prefetch" href="/assets/js/123.e7e3d674.js"><link rel="prefetch" href="/assets/js/124.856960ac.js"><link rel="prefetch" href="/assets/js/125.2ba3c2dd.js"><link rel="prefetch" href="/assets/js/126.b3caaa1e.js"><link rel="prefetch" href="/assets/js/127.285b3a20.js"><link rel="prefetch" href="/assets/js/128.b495c134.js"><link rel="prefetch" href="/assets/js/129.877b4b55.js"><link rel="prefetch" href="/assets/js/13.2dd29be6.js"><link rel="prefetch" href="/assets/js/130.8bdc70a0.js"><link rel="prefetch" href="/assets/js/131.8bd6d765.js"><link rel="prefetch" href="/assets/js/132.6b2db52a.js"><link rel="prefetch" href="/assets/js/133.79680b78.js"><link rel="prefetch" href="/assets/js/134.7a615b09.js"><link rel="prefetch" href="/assets/js/135.9cb6380d.js"><link rel="prefetch" href="/assets/js/136.5da3bd50.js"><link rel="prefetch" href="/assets/js/137.e7bf18ef.js"><link rel="prefetch" href="/assets/js/138.c9f6eae9.js"><link rel="prefetch" href="/assets/js/139.f30f5add.js"><link rel="prefetch" href="/assets/js/14.a270d07a.js"><link rel="prefetch" href="/assets/js/15.7d5e4bd4.js"><link rel="prefetch" href="/assets/js/16.5a3bb431.js"><link rel="prefetch" href="/assets/js/17.649483ef.js"><link rel="prefetch" href="/assets/js/18.1af84c85.js"><link rel="prefetch" href="/assets/js/19.29977f25.js"><link rel="prefetch" href="/assets/js/20.b35ea725.js"><link rel="prefetch" href="/assets/js/21.3417699a.js"><link rel="prefetch" href="/assets/js/22.64e80d81.js"><link rel="prefetch" href="/assets/js/23.e1712b3e.js"><link rel="prefetch" href="/assets/js/24.2f165286.js"><link rel="prefetch" href="/assets/js/25.3573ec01.js"><link rel="prefetch" href="/assets/js/26.a606df51.js"><link rel="prefetch" href="/assets/js/27.e7b390ae.js"><link rel="prefetch" href="/assets/js/28.3d7706d6.js"><link rel="prefetch" href="/assets/js/29.71c05191.js"><link rel="prefetch" href="/assets/js/3.75662cb9.js"><link rel="prefetch" href="/assets/js/30.95d5ddea.js"><link rel="prefetch" href="/assets/js/31.67c1ae59.js"><link rel="prefetch" href="/assets/js/32.30f3c1a7.js"><link rel="prefetch" href="/assets/js/33.2229d3c6.js"><link rel="prefetch" href="/assets/js/34.1a2c1deb.js"><link rel="prefetch" href="/assets/js/35.9301ebf2.js"><link rel="prefetch" href="/assets/js/36.965abfe7.js"><link rel="prefetch" href="/assets/js/37.7daee6a7.js"><link rel="prefetch" href="/assets/js/38.460713c6.js"><link rel="prefetch" href="/assets/js/39.4b5e4c33.js"><link rel="prefetch" href="/assets/js/4.b93b4620.js"><link rel="prefetch" href="/assets/js/40.d37bc24f.js"><link rel="prefetch" href="/assets/js/41.54404c31.js"><link rel="prefetch" href="/assets/js/42.b16a6835.js"><link rel="prefetch" href="/assets/js/43.18f84fbd.js"><link rel="prefetch" href="/assets/js/44.7fbec700.js"><link rel="prefetch" href="/assets/js/45.a5da1ac5.js"><link rel="prefetch" href="/assets/js/46.d17dec0b.js"><link rel="prefetch" href="/assets/js/47.df17b5eb.js"><link rel="prefetch" href="/assets/js/48.62bf91df.js"><link rel="prefetch" href="/assets/js/49.9f137b2b.js"><link rel="prefetch" href="/assets/js/5.4581e1f1.js"><link rel="prefetch" href="/assets/js/50.7f27c7d4.js"><link rel="prefetch" href="/assets/js/51.172f595a.js"><link rel="prefetch" href="/assets/js/52.788228b6.js"><link rel="prefetch" href="/assets/js/53.a8005e65.js"><link rel="prefetch" href="/assets/js/54.67505623.js"><link rel="prefetch" href="/assets/js/55.d3f013fc.js"><link rel="prefetch" href="/assets/js/56.10a5fc6a.js"><link rel="prefetch" href="/assets/js/57.646291f2.js"><link rel="prefetch" href="/assets/js/58.c83bffdf.js"><link rel="prefetch" href="/assets/js/59.6d86efe9.js"><link rel="prefetch" href="/assets/js/6.0e578700.js"><link rel="prefetch" href="/assets/js/60.fd7c41ea.js"><link rel="prefetch" href="/assets/js/61.1d5b0dfa.js"><link rel="prefetch" href="/assets/js/62.d82b53e1.js"><link rel="prefetch" href="/assets/js/63.4882bb87.js"><link rel="prefetch" href="/assets/js/64.99f1ce3d.js"><link rel="prefetch" href="/assets/js/65.a392b7a2.js"><link rel="prefetch" href="/assets/js/66.cfe06984.js"><link rel="prefetch" href="/assets/js/67.be17be93.js"><link rel="prefetch" href="/assets/js/68.6251952b.js"><link rel="prefetch" href="/assets/js/69.35ab58ca.js"><link rel="prefetch" href="/assets/js/7.3445630a.js"><link rel="prefetch" href="/assets/js/70.42fb218a.js"><link rel="prefetch" href="/assets/js/71.43690c3d.js"><link rel="prefetch" href="/assets/js/72.41e27b0b.js"><link rel="prefetch" href="/assets/js/73.fad27f7e.js"><link rel="prefetch" href="/assets/js/74.9e09628e.js"><link rel="prefetch" href="/assets/js/75.f1030a09.js"><link rel="prefetch" href="/assets/js/76.733e3e68.js"><link rel="prefetch" href="/assets/js/77.638ab4a9.js"><link rel="prefetch" href="/assets/js/78.e105f752.js"><link rel="prefetch" href="/assets/js/79.59f3ec5d.js"><link rel="prefetch" href="/assets/js/8.463fcb3e.js"><link rel="prefetch" href="/assets/js/80.78249975.js"><link rel="prefetch" href="/assets/js/81.24fc85b0.js"><link rel="prefetch" href="/assets/js/82.b5fae730.js"><link rel="prefetch" href="/assets/js/83.a9d5eae5.js"><link rel="prefetch" href="/assets/js/84.ecf273d4.js"><link rel="prefetch" href="/assets/js/85.3efaade9.js"><link rel="prefetch" href="/assets/js/86.1baee96a.js"><link rel="prefetch" href="/assets/js/87.1cb7b963.js"><link rel="prefetch" href="/assets/js/88.ae03d570.js"><link rel="prefetch" href="/assets/js/89.8d7bc923.js"><link rel="prefetch" href="/assets/js/9.ee731b79.js"><link rel="prefetch" href="/assets/js/90.c11dd8d6.js"><link rel="prefetch" href="/assets/js/91.29eca504.js"><link rel="prefetch" href="/assets/js/92.0c4bdb96.js"><link rel="prefetch" href="/assets/js/93.cf07ad60.js"><link rel="prefetch" href="/assets/js/94.dd536132.js"><link rel="prefetch" href="/assets/js/95.a3f210fe.js"><link rel="prefetch" href="/assets/js/96.00afeac7.js"><link rel="prefetch" href="/assets/js/98.03573ada.js"><link rel="prefetch" href="/assets/js/99.6dbf53b0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.6a41b040.css">
+  </head>
+  <body class="theme-mode-light">
+    <div id="app" data-server-rendered="true"><div class="theme-container sidebar-open have-rightmenu"><header class="navbar blur"><div title="目录" class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/img/logo.png" alt="Friedy's blog" class="logo"> <span class="site-name can-hide">Friedy's blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><a href="/web/" class="link-title">前端</a> <span class="title" style="display:none;">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/web/vue/" class="nav-link">《Vue》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/javascript/" class="nav-link">《JavaScript教程》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/wxmini/" class="nav-link">小程序笔记</a></li><li class="dropdown-item"><!----> <a href="/web/css/" class="nav-link">《CSS》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/html/" class="nav-link">《HTML》笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><a href="/back/" class="link-title">后端</a> <span class="title" style="display:none;">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/back/java/" class="nav-link">《Java》笔记</a></li><li class="dropdown-item"><!----> <a href="/back/springboot/" class="nav-link">《SpringBoot》笔记</a></li><li class="dropdown-item"><!----> <a href="/back/springcloud/" class="nav-link">《SpringCloud》笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="智算" class="dropdown-title"><a href="/tec/" class="link-title">智算</a> <span class="title" style="display:none;">智算</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tec/mlrecord/" class="nav-link">机器学习笔记</a></li><li class="dropdown-item"><!----> <a href="/tec/dlsummary/" class="nav-link">深度学习知识点总结</a></li><li class="dropdown-item"><!----> <a href="/tec/llmrecord/" class="nav-link">大模型学习笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="更多" class="dropdown-title"><a href="/more/" class="link-title">更多</a> <span class="title" style="display:none;">更多</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/interview/" class="nav-link">面试经验</a></li><li class="dropdown-item"><!----> <a href="/friends/" class="nav-link">友情链接</a></li></ul></div></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="收藏" class="dropdown-title"><a href="/pages/beb6c0bd8a66cea6/" class="link-title">收藏</a> <span class="title" style="display:none;">收藏</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/beb6c0bd8a66cea6/" class="nav-link">网站</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="索引" class="dropdown-title"><a href="/archives/" class="link-title">索引</a> <span class="title" style="display:none;">索引</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/" class="nav-link">分类</a></li><li class="dropdown-item"><!----> <a href="/tags/" class="nav-link">标签</a></li><li class="dropdown-item"><!----> <a href="/archives/" class="nav-link">归档</a></li></ul></div></div> <a href="https://github.com/friedy37/friedy37.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar-hover-trigger"></div> <aside class="sidebar" style="display:none;"><div class="blogger"><img src="https://jsd.cdn.zzko.cn/gh/friedy37/picgo/127.jpeg"> <div class="blogger-info"><h3>Friedy</h3> <span>全栈攻城狮</span></div></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><a href="/web/" class="link-title">前端</a> <span class="title" style="display:none;">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/web/vue/" class="nav-link">《Vue》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/javascript/" class="nav-link">《JavaScript教程》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/wxmini/" class="nav-link">小程序笔记</a></li><li class="dropdown-item"><!----> <a href="/web/css/" class="nav-link">《CSS》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/html/" class="nav-link">《HTML》笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><a href="/back/" class="link-title">后端</a> <span class="title" style="display:none;">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/back/java/" class="nav-link">《Java》笔记</a></li><li class="dropdown-item"><!----> <a href="/back/springboot/" class="nav-link">《SpringBoot》笔记</a></li><li class="dropdown-item"><!----> <a href="/back/springcloud/" class="nav-link">《SpringCloud》笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="智算" class="dropdown-title"><a href="/tec/" class="link-title">智算</a> <span class="title" style="display:none;">智算</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tec/mlrecord/" class="nav-link">机器学习笔记</a></li><li class="dropdown-item"><!----> <a href="/tec/dlsummary/" class="nav-link">深度学习知识点总结</a></li><li class="dropdown-item"><!----> <a href="/tec/llmrecord/" class="nav-link">大模型学习笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="更多" class="dropdown-title"><a href="/more/" class="link-title">更多</a> <span class="title" style="display:none;">更多</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/interview/" class="nav-link">面试经验</a></li><li class="dropdown-item"><!----> <a href="/friends/" class="nav-link">友情链接</a></li></ul></div></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="收藏" class="dropdown-title"><a href="/pages/beb6c0bd8a66cea6/" class="link-title">收藏</a> <span class="title" style="display:none;">收藏</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/beb6c0bd8a66cea6/" class="nav-link">网站</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="索引" class="dropdown-title"><a href="/archives/" class="link-title">索引</a> <span class="title" style="display:none;">索引</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/" class="nav-link">分类</a></li><li class="dropdown-item"><!----> <a href="/tags/" class="nav-link">标签</a></li><li class="dropdown-item"><!----> <a href="/archives/" class="nav-link">归档</a></li></ul></div></div> <a href="https://github.com/friedy37/friedy37.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/pages/b7196d/" class="sidebar-link">SpringCloud入门概述</a></li><li><a href="/pages/f64dfe/" class="sidebar-link">Eureka服务发现框架</a></li><li><a href="/pages/cb337d/" aria-current="page" class="active sidebar-link">Ribbon：负载均衡（基于客户端）</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header level2"><a href="/pages/cb337d/#_3-ribbon-负载均衡-基于客户端" class="sidebar-link">3. Ribbon：负载均衡 (基于客户端)</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header level3"><a href="/pages/cb337d/#_3-1-ribbon-简介及负载均衡" class="sidebar-link">3.1 Ribbon 简介及负载均衡</a></li><li class="sidebar-sub-header level3"><a href="/pages/cb337d/#_3-2-ribbon-集成" class="sidebar-link">3.2 Ribbon 集成</a></li><li class="sidebar-sub-header level3"><a href="/pages/cb337d/#_3-3-使用-ribbon-实现负载均衡" class="sidebar-link">3.3 使用 Ribbon 实现负载均衡</a></li><li class="sidebar-sub-header level3"><a href="/pages/cb337d/#_3-4-自定义-ribbon-负载均衡算法" class="sidebar-link">3.4 自定义 Ribbon 负载均衡算法</a></li></ul></li></ul></li><li><a href="/pages/9e327d/" class="sidebar-link">Feign：负载均衡（基于客户端）</a></li><li><a href="/pages/417a3f/" class="sidebar-link">Hystrix：断路器</a></li><li><a href="/pages/4c0a8e/" class="sidebar-link">Zuul路由网关</a></li><li><a href="/pages/2601e8/" class="sidebar-link">SpringCloud Config分布式配置</a></li><li><a href="/pages/b23d18/" class="sidebar-link">总结</a></li></ul> </aside> <div><main class="page"><div class="theme-vdoing-wrapper "><div class="articleInfo-wrap" data-v-06225672><div class="articleInfo" data-v-06225672><ul class="breadcrumbs" data-v-06225672><li data-v-06225672><a href="/" title="首页" class="iconfont icon-home router-link-active" data-v-06225672></a></li> <li data-v-06225672><a href="/back/springcloud/#《SpringCloud》笔记" data-v-06225672>《SpringCloud》笔记</a></li></ul> <div class="info" data-v-06225672><div title="作者" class="author iconfont icon-touxiang" data-v-06225672><a href="https://github.com/friedy37" target="_blank" title="作者" class="beLink" data-v-06225672>friedy37</a></div> <div title="创建时间" class="date iconfont icon-riqi" data-v-06225672><a href="javascript:;" data-v-06225672>2024-06-08</a></div> <!----></div></div></div> <!----> <div class="content-wrapper"><div class="right-menu-wrapper"><div class="right-menu-margin"><div class="right-menu-title">目录</div> <div class="right-menu-content"></div></div></div> <h1><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAABKFJREFUSA3tVl1oFVcQnrMbrak3QUgkya1akpJYcrUtIqW1JvFBE9LiQ5v6JmJpolbMg32rVrhgoYK0QiMY6i9Y6EMaW5D+xFJaTYItIuK2Kr3+BJNwkxBj05sQY3b3nM6cs2dv9t7NT/vQJw/sndk5M/PNzJkzewGerP+pAmy+ON8lLzUJgA8ZYxYIYZmGYRnctDaWvJJAmTtfP1pvXsBCCPP8QFcCaRkZYACgDZFO4stNIcBCajEOlmmC9XpJ9bAGCaPaPmzPl32dvLSVu3BWCTQs0XQQ6g0DYgwLIoAZbBCdW/i+781o1VVlm/410mw4h06Y7bIPHNyWDyL4FHkX03Q8SrzNhZTZriieckWt7cL6MM85YcLpsi/7O9/iXFT6MswI0DmmpkSaJ0qLxFIm3+i1THHB3zmBH3PYx9CcykcLOeQVVa7QtdxTgQgEleX2AjHYfwA+2ddV77ruGoJUbhGDI09YSNXyMpUt5ylOzxgbUmtOp7NmbNt8v3arjTBfYELmLUV+M+nSawNNAUqpT3ClJWg5I3BLT+cGW/DXNGCa6tx1aakCGEigArTn4TDIPdrXXYKCZNrHLMCOEPvHBlLQ99s9eHB7EB6NTki73CVPQ2F5MSx/uRQixfmq7rK0wYD8w8E905bnPDfwoWs/rfv93NWN/ZfvwsLIU7A09gxECyISeGJkHAau98L97tuw7NXnoPyNF8FcYGLGKsOs0mN3OEyec9esGW/ZEl945dTP34wlR2FZVQWU1q0Cw8Tr7p+hgLLNL0FPxx/Q35mA8aEUrH6nCgwEl0tn7wUiZYJnNRh6DK4UH/k0lfyrsBKdPVv/AriGIQcEDQZ65LBAGe2Rzui9Ybjz7XUppz1/uKBbyVPGkN3ZAeC6hr0x7Nr38N5+EqkoOm17xpoqR9ohQF55ERSvr4Dkr3chNfC3DMzGJlNBElW8w9nsGQvhNGIzDkXzCg8cLK951xHsFBlTJspJNi3ZFIMF2AeDV3q8DNOB+YHi6QTrChDIWDBRi5U5f+ZMfJLu3ccrqxtdxk4SKH336LFxSmkqefwU5T8fhdSdQf9IVKD6aNiwI/hnmcAZ91isYMJIaCUCx9W098+LgruikeTqzqqxKPUwqJyCPJiyemVVZBOijDGjD38Os0jOiSPL1z3SPjXNANbiNPXAdzTfukjjuknNBbyz3nwgTd3AVFqUJ5hpHlq9MveLnWwttUfoygBmvVjuikxND3znrhsELnZk7k+OjIGxeNEkomyLVta0xxn+HZhjBc4YZ/AFjHjz9u3xRZl2BN4aq9nFwWh16IrQ1aHHEd3j1+4/dB9OtH4e29A2H1DyHQRmOSfQZ1Fy7MHBTGB6J/Djq6p3OxyO2cB+4Car7v/o3GXgfAkj23+x9ID1Teoamo/SXcbvSf2PX7Vc8DdCmE1vN9di+32P9/5YR3vLnhCVGUWBjEkr3yh4H8v9CzmsbdhzOKzsJKM90iFdaTMjRPhGVsakRvOaRidljo6H6G7j+ctrJpsP+4COhDIl0La2+FS4+5mlocBaXY5QnGZysIBYoeSsl5qQzrSj/cgNrfuEzlWBfwA+EjrZyWUvpAAAAABJRU5ErkJggg==">Ribbon：负载均衡（基于客户端）<!----></h1>  <div class="theme-vdoing-content content__default"><h2 id="_3-ribbon-负载均衡-基于客户端"><a href="#_3-ribbon-负载均衡-基于客户端" class="header-anchor">#</a> 3. Ribbon：负载均衡 (基于客户端)</h2> <h3 id="_3-1-ribbon-简介及负载均衡"><a href="#_3-1-ribbon-简介及负载均衡" class="header-anchor">#</a> 3.1 Ribbon 简介及负载均衡</h3> <p>Spring Cloud Ribbon 是一个基于 HTTP 和 TCP 的客户端负载均衡工具，它基于 Netflix Ribbon 实现。</p> <p>简单的说，Ribbon 是 Netflix 发布的开源项目，主要功能是提供客户端的软件负载均衡算法，将 Netflix 的中间层服务连接在一起。Ribbon 的客户端组件提供一系列完整的配置项，如：连接超时、重试等。简单的说，就是在配置文件中列出 LoadBalancer (简称 LB：负载均衡) 后面所有的及其，Ribbon 会自动的帮助你基于某种规则 (如简单轮询，随机连接等等) 去连接这些机器。我们也容易使用 Ribbon 实现自定义的负载均衡算法！<br> <img src="https://img-blog.csdnimg.cn/20210425201056964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70" alt=""></p> <ul><li>LB，即负载均衡 (LoadBalancer) ，在微服务或分布式集群中经常用的一种应用。</li> <li>负载均衡简单的说就是将用户的请求平摊的分配到多个服务上，从而达到系统的 HA (高用)。</li> <li>常见的负载均衡软件有 Nginx、Lvs 等等。</li> <li>Dubbo、SpringCloud 中均给我们提供了负载均衡，SpringCloud 的负载均衡算法可以自定义。</li> <li>负载均衡简单分类：
+<ul><li>集中式 LB
+<ul><li>即在服务的提供方和消费方之间使用独立的 LB 设施，如 Nginx(反向代理服务器)，由该设施负责把访问请求通过某种策略转发至服务的提供方！</li></ul></li> <li>进程式 LB
+<ul><li>将 LB 逻辑集成到消费方，消费方从服务注册中心获知有哪些地址可用，然后自己再从这些地址中选出一个合适的服务器。</li> <li>Ribbon 就属于进程内 LB，它只是一个类库，集成于消费方进程，消费方通过它来获取到服务提供方的地址！</li></ul></li></ul></li></ul> <h3 id="_3-2-ribbon-集成"><a href="#_3-2-ribbon-集成" class="header-anchor">#</a> 3.2 Ribbon 集成</h3> <p>springcloud-consumer-dept-80 向 pom.xml 中添加 Ribbon 和 Eureka 依赖</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;!--Ribbon--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-ribbon&lt;/artifactId&gt;
+    &lt;version&gt;1.4.6.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!--Eureka: Ribbon需要从Eureka服务中心获取要拿什么--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt;
+    &lt;version&gt;1.4.6.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>配置文件中配置 Eureka</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># Eureka配置
+eureka:
+  client:
+    register-with-eureka: false # 不向 Eureka注册自己
+    service-url: # 从三个注册中心中随机取一个去访问
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>主启动类加注解开启 Eureka</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>//Ribbon 和 Eureka 整合以后，客户端可以直接调用，不用关心IP地址和端口号
+@SpringBootApplication
+@EnableEurekaClient //开启Eureka 客户端
+public class DeptConsumer_80 {
+    public static void main(String[] args) {
+        SpringApplication.run(DeptConsumer_80.class, args);
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>自定义 Spring 配置类：ConfigBean.java 配置负载均衡实现 RestTemplate</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>@Configuration
+public class ConfigBean {
+
+    @LoadBalanced //配置负载均衡实现RestTemplate
+    @Bean
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>修改 conroller：DeptConsumerController.java</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>//Ribbon:我们这里的地址，应该是一个变量，通过服务名来访问
+//private static final String REST_URL_PREFIX = &quot;http://localhost:8001&quot;;
+private static final String REST_URL_PREFIX = &quot;http://SPRINGCLOUD-PROVIDER-DEPT&quot;;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_3-3-使用-ribbon-实现负载均衡"><a href="#_3-3-使用-ribbon-实现负载均衡" class="header-anchor">#</a> 3.3 使用 Ribbon 实现负载均衡</h3> <p>流程图：<br> <img src="https://img-blog.csdnimg.cn/20210425201437455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70" alt=""><br>
+图中黑色实线就是 Ribbon 做的事</p> <ol><li><p>新建两个服务提供者 Moudle：springcloud-provider-dept-8003、springcloud-provider-dept-8002</p></li> <li><p>参照 springcloud-provider-dept-8001 依次为另外两个 Moudle 添加 pom.xml 依赖 、resourece 下的 mybatis 和 application.yml 配置，Java 代码</p></li> <li><p>启动所有服务测试 (根据自身电脑配置决定启动服务的个数)，访问 http://eureka7001.com:7002 / 查看结果<br>
+第一次访问<br> <img src="https://img-blog.csdnimg.cn/20210425201938952.png" alt=""><br>
+第二次访问<br> <img src="https://img-blog.csdnimg.cn/20210425202026557.png" alt=""><br>
+默认使用的轮询算法</p></li></ol> <p>在 springcloud-provider-dept-80 模块下的 ConfigBean 中进行配置，切换使用不同的算法</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>@Configuration
+public class ConfigBean {
+
+    /**
+     * IRule:
+     * RoundRobinRule 轮询策略
+     * RandomRule 随机策略
+     * AvailabilityFilteringRule ： 会先过滤掉，跳闸，访问故障的服务~，对剩下的进行轮询~
+     * RetryRule ： 会先按照轮询获取服务~，如果服务获取失败，则会在指定的时间内进行，重试
+     */
+    @Bean
+    public IRule myRule() {
+        return new RandomRule();//使用随机策略
+        //return new RoundRobinRule();//使用轮询策略
+        //return new AvailabilityFilteringRule();//使用轮询策略
+        //return new RetryRule();//使用轮询策略
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><h3 id="_3-4-自定义-ribbon-负载均衡算法"><a href="#_3-4-自定义-ribbon-负载均衡算法" class="header-anchor">#</a> 3.4 自定义 Ribbon 负载均衡算法</h3> <p>在 myRule 包下自定义一个配置类 MyRule.java，注意：该包不要和主启动类所在的包同级，要跟启动类所在包同级<br> <img src="https://img-blog.csdnimg.cn/20210425202305543.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70" alt=""><br>
+MyRule.java</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>@Configuration
+public class MyRule {
+
+    @Bean
+    public IRule myRule(){
+        return new MyRandomRule();//默认是轮询RandomRule,现在自定义为自己的
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>MyRandomRule.java</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>public class MyRandomRule extends AbstractLoadBalancerRule {
+
+    /**
+     * 每个服务访问5次则换下一个服务(总共3个服务)
+     * &lt;p&gt;
+     * total=0,默认=0,如果=5,指向下一个服务节点
+     * index=0,默认=0,如果total=5,index+1
+     */
+    private int total = 0;//被调用的次数
+    private int currentIndex = 0;//当前是谁在提供服务
+
+    //@edu.umd.cs.findbugs.annotations.SuppressWarnings(value = &quot;RCN_REDUNDANT_NULLCHECK_OF_NULL_VALUE&quot;)
+    public Server choose(ILoadBalancer lb, Object key) {
+        if (lb == null) {
+            return null;
+        }
+        Server server = null;
+
+        while (server == null) {
+            if (Thread.interrupted()) {
+                return null;
+            }
+            List&lt;Server&gt; upList = lb.getReachableServers();//获得当前活着的服务
+            List&lt;Server&gt; allList = lb.getAllServers();//获取所有的服务
+
+            int serverCount = allList.size();
+            if (serverCount == 0) {
+                /*
+                 * No servers. End regardless of pass, because subsequent passes
+                 * only get more restrictive.
+                 */
+                return null;
+            }
+
+            //int index = chooseRandomInt(serverCount);//生成区间随机数
+            //server = upList.get(index);//从或活着的服务中,随机获取一个
+
+            //=====================自定义代码=========================
+
+            if (total &lt; 5) {
+                server = upList.get(currentIndex);
+                total++;
+            } else {
+                total = 1;
+                currentIndex++;
+                if (currentIndex &gt;= upList.size()) {
+                    currentIndex = 0;
+                }
+                server = upList.get(currentIndex);//从活着的服务中,获取指定的服务来进行操作
+            }
+            
+            //======================================================
+            
+            if (server == null) {
+                /*
+                 * The only time this should happen is if the server list were
+                 * somehow trimmed. This is a transient condition. Retry after
+                 * yielding.
+                 */
+                Thread.yield();
+                continue;
+            }
+            if (server.isAlive()) {
+                return (server);
+            }
+            // Shouldn't actually happen.. but must be transient or a bug.
+            server = null;
+            Thread.yield();
+        }
+        return server;
+    }
+
+    protected int chooseRandomInt(int serverCount) {
+        return ThreadLocalRandom.current().nextInt(serverCount);
+    }
+
+    @Override
+    public Server choose(Object key) {
+        return choose(getLoadBalancer(), key);
+    }
+
+    @Override
+    public void initWithNiwsConfig(IClientConfig clientConfig) {
+        // TODO Auto-generated method stub
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br></div></div><p>主启动类开启负载均衡并指定自定义的 MyRule 配置类</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>//Ribbon 和 Eureka 整合以后，客户端可以直接调用，不用关心IP地址和端口号
+@SpringBootApplication
+@EnableEurekaClient
+//在微服务启动的时候就能加载自定义的Ribbon类(自定义的规则会覆盖原有默认的规则)
+@RibbonClient(name = &quot;SPRINGCLOUD-PROVIDER-DEPT&quot;,configuration = MyRule.class)//开启负载均衡,并指定自定义的规则
+public class DeptConsumer_80 {
+    public static void main(String[] args) {
+        SpringApplication.run(DeptConsumer_80.class, args);
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div></div></div>  <div class="page-edit"><div class="edit-link"><a href="https://github.com/friedy37/friedy37.github.io/edit/master/docs/《SpringCloud》笔记/03.Ribbon负载均衡.md" target="_blank" rel="noopener noreferrer">编辑</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="tags"><a href="/tags/?tag=SpringCloud" title="标签">#SpringCloud</a></div> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2024/06/09, 21:19:54</span></div></div> <div class="page-nav-wapper"><div class="page-nav-centre-wrap"><a href="/pages/f64dfe/" class="page-nav-centre page-nav-centre-prev"><div class="tooltip">Eureka服务发现框架</div></a> <a href="/pages/9e327d/" class="page-nav-centre page-nav-centre-next"><div class="tooltip">Feign：负载均衡（基于客户端）</div></a></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/pages/f64dfe/" class="prev">Eureka服务发现框架</a></span> <span class="next"><a href="/pages/9e327d/">Feign：负载均衡（基于客户端）</a>→
+      </span></p></div></div></div> <div class="article-list"><div class="article-title"><a href="/archives/" class="iconfont icon-bi">最近更新</a></div> <div class="article-wrapper"><dl><dd>01</dd> <dt><a href="/pages/c63688/"><div>
+            大模型学习笔记
+            <!----></div></a> <span class="date">11-29</span></dt></dl><dl><dd>02</dd> <dt><a href="/pages/f11edc/"><div>
+            机器学习笔记
+            <!----></div></a> <span class="date">11-29</span></dt></dl><dl><dd>03</dd> <dt><a href="/pages/a616ef/"><div>
+            深度学习知识点总结
+            <!----></div></a> <span class="date">11-22</span></dt></dl> <dl><dd></dd> <dt><a href="/archives/" class="more">更多文章&gt;</a></dt></dl></div></div></main></div> <div class="footer"><div class="icons"><a href="mailto:276970215@qq.com" title="发邮件" target="_blank" class="iconfont icon-youjian"></a><a href="https://github.com/friedy37" title="GitHub" target="_blank" class="iconfont icon-github"></a><a href="https://music.163.com/" title="听音乐" target="_blank" class="iconfont icon-erji"></a></div> 
+  Theme by
+  <a href="https://github.com/xugaoyi/vuepress-theme-vdoing" target="_blank" title="本站主题">Vdoing</a> 
+    | Copyright © 2019-2024
+    <span>Evan Xu | <a href="https://github.com/friedy37/vuepress-theme-vdoing/blob/master/LICENSE" target="_blank">MIT License</a></span></div> <div class="buttons"><div title="返回顶部" class="button blur go-to-top iconfont icon-fanhuidingbu" style="display:none;"></div> <div title="去评论" class="button blur go-to-comment iconfont icon-pinglun" style="display:none;"></div> <div title="主题模式" class="button blur theme-mode-but iconfont icon-zhuti"><ul class="select-box" style="display:none;"><li class="iconfont icon-zidong">
+          跟随系统
+        </li><li class="iconfont icon-rijianmoshi">
+          浅色模式
+        </li><li class="iconfont icon-yejianmoshi">
+          深色模式
+        </li><li class="iconfont icon-yuedu">
+          阅读模式
+        </li></ul></div></div> <!----> <!----> <!----></div><div class="global-ui"><div></div></div></div>
+    <script src="/assets/js/app.a9f1a96e.js" defer></script><script src="/assets/js/2.ef8d47f0.js" defer></script><script src="/assets/js/97.e79a48f3.js" defer></script>
+  </body>
+</html>

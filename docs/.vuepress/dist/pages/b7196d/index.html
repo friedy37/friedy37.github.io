@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SpringCloud入门概述 | Friedy&#39;s blog</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/img/favicon.ico">
+    <meta name="description" content="个人知识库。">
+    <meta name="keywords" content="个人知识库,web前端,后端开发,技术文档,面试题">
+    <meta name="baidu-site-verification" content="7F55weZDDc">
+    <meta name="theme-color" content="#11a8cd">
+    
+    <link rel="preload" href="/assets/css/0.styles.6a41b040.css" as="style"><link rel="preload" href="/assets/js/app.a9f1a96e.js" as="script"><link rel="preload" href="/assets/js/2.ef8d47f0.js" as="script"><link rel="preload" href="/assets/js/95.a3f210fe.js" as="script"><link rel="prefetch" href="/assets/js/10.c79a4c82.js"><link rel="prefetch" href="/assets/js/100.2b9b5aae.js"><link rel="prefetch" href="/assets/js/101.0995c564.js"><link rel="prefetch" href="/assets/js/102.b8dd509e.js"><link rel="prefetch" href="/assets/js/103.4f8e3ec3.js"><link rel="prefetch" href="/assets/js/104.5826f530.js"><link rel="prefetch" href="/assets/js/105.c968d1cd.js"><link rel="prefetch" href="/assets/js/106.07bd99ac.js"><link rel="prefetch" href="/assets/js/107.a34ae64f.js"><link rel="prefetch" href="/assets/js/108.04fdc420.js"><link rel="prefetch" href="/assets/js/109.42c6a43b.js"><link rel="prefetch" href="/assets/js/11.d42eacc2.js"><link rel="prefetch" href="/assets/js/110.20d9f70a.js"><link rel="prefetch" href="/assets/js/111.ea8445ef.js"><link rel="prefetch" href="/assets/js/112.b1079e60.js"><link rel="prefetch" href="/assets/js/113.01d3566d.js"><link rel="prefetch" href="/assets/js/114.4a3ff96d.js"><link rel="prefetch" href="/assets/js/115.a55f1a44.js"><link rel="prefetch" href="/assets/js/116.05bbe242.js"><link rel="prefetch" href="/assets/js/117.76d0d18d.js"><link rel="prefetch" href="/assets/js/118.fa8edad4.js"><link rel="prefetch" href="/assets/js/119.db84394d.js"><link rel="prefetch" href="/assets/js/12.841b4079.js"><link rel="prefetch" href="/assets/js/120.0bae7ee3.js"><link rel="prefetch" href="/assets/js/121.649fd022.js"><link rel="prefetch" href="/assets/js/122.92fbaf46.js"><link rel="prefetch" href="/assets/js/123.e7e3d674.js"><link rel="prefetch" href="/assets/js/124.856960ac.js"><link rel="prefetch" href="/assets/js/125.2ba3c2dd.js"><link rel="prefetch" href="/assets/js/126.b3caaa1e.js"><link rel="prefetch" href="/assets/js/127.285b3a20.js"><link rel="prefetch" href="/assets/js/128.b495c134.js"><link rel="prefetch" href="/assets/js/129.877b4b55.js"><link rel="prefetch" href="/assets/js/13.2dd29be6.js"><link rel="prefetch" href="/assets/js/130.8bdc70a0.js"><link rel="prefetch" href="/assets/js/131.8bd6d765.js"><link rel="prefetch" href="/assets/js/132.6b2db52a.js"><link rel="prefetch" href="/assets/js/133.79680b78.js"><link rel="prefetch" href="/assets/js/134.7a615b09.js"><link rel="prefetch" href="/assets/js/135.9cb6380d.js"><link rel="prefetch" href="/assets/js/136.5da3bd50.js"><link rel="prefetch" href="/assets/js/137.e7bf18ef.js"><link rel="prefetch" href="/assets/js/138.c9f6eae9.js"><link rel="prefetch" href="/assets/js/139.f30f5add.js"><link rel="prefetch" href="/assets/js/14.a270d07a.js"><link rel="prefetch" href="/assets/js/15.7d5e4bd4.js"><link rel="prefetch" href="/assets/js/16.5a3bb431.js"><link rel="prefetch" href="/assets/js/17.649483ef.js"><link rel="prefetch" href="/assets/js/18.1af84c85.js"><link rel="prefetch" href="/assets/js/19.29977f25.js"><link rel="prefetch" href="/assets/js/20.b35ea725.js"><link rel="prefetch" href="/assets/js/21.3417699a.js"><link rel="prefetch" href="/assets/js/22.64e80d81.js"><link rel="prefetch" href="/assets/js/23.e1712b3e.js"><link rel="prefetch" href="/assets/js/24.2f165286.js"><link rel="prefetch" href="/assets/js/25.3573ec01.js"><link rel="prefetch" href="/assets/js/26.a606df51.js"><link rel="prefetch" href="/assets/js/27.e7b390ae.js"><link rel="prefetch" href="/assets/js/28.3d7706d6.js"><link rel="prefetch" href="/assets/js/29.71c05191.js"><link rel="prefetch" href="/assets/js/3.75662cb9.js"><link rel="prefetch" href="/assets/js/30.95d5ddea.js"><link rel="prefetch" href="/assets/js/31.67c1ae59.js"><link rel="prefetch" href="/assets/js/32.30f3c1a7.js"><link rel="prefetch" href="/assets/js/33.2229d3c6.js"><link rel="prefetch" href="/assets/js/34.1a2c1deb.js"><link rel="prefetch" href="/assets/js/35.9301ebf2.js"><link rel="prefetch" href="/assets/js/36.965abfe7.js"><link rel="prefetch" href="/assets/js/37.7daee6a7.js"><link rel="prefetch" href="/assets/js/38.460713c6.js"><link rel="prefetch" href="/assets/js/39.4b5e4c33.js"><link rel="prefetch" href="/assets/js/4.b93b4620.js"><link rel="prefetch" href="/assets/js/40.d37bc24f.js"><link rel="prefetch" href="/assets/js/41.54404c31.js"><link rel="prefetch" href="/assets/js/42.b16a6835.js"><link rel="prefetch" href="/assets/js/43.18f84fbd.js"><link rel="prefetch" href="/assets/js/44.7fbec700.js"><link rel="prefetch" href="/assets/js/45.a5da1ac5.js"><link rel="prefetch" href="/assets/js/46.d17dec0b.js"><link rel="prefetch" href="/assets/js/47.df17b5eb.js"><link rel="prefetch" href="/assets/js/48.62bf91df.js"><link rel="prefetch" href="/assets/js/49.9f137b2b.js"><link rel="prefetch" href="/assets/js/5.4581e1f1.js"><link rel="prefetch" href="/assets/js/50.7f27c7d4.js"><link rel="prefetch" href="/assets/js/51.172f595a.js"><link rel="prefetch" href="/assets/js/52.788228b6.js"><link rel="prefetch" href="/assets/js/53.a8005e65.js"><link rel="prefetch" href="/assets/js/54.67505623.js"><link rel="prefetch" href="/assets/js/55.d3f013fc.js"><link rel="prefetch" href="/assets/js/56.10a5fc6a.js"><link rel="prefetch" href="/assets/js/57.646291f2.js"><link rel="prefetch" href="/assets/js/58.c83bffdf.js"><link rel="prefetch" href="/assets/js/59.6d86efe9.js"><link rel="prefetch" href="/assets/js/6.0e578700.js"><link rel="prefetch" href="/assets/js/60.fd7c41ea.js"><link rel="prefetch" href="/assets/js/61.1d5b0dfa.js"><link rel="prefetch" href="/assets/js/62.d82b53e1.js"><link rel="prefetch" href="/assets/js/63.4882bb87.js"><link rel="prefetch" href="/assets/js/64.99f1ce3d.js"><link rel="prefetch" href="/assets/js/65.a392b7a2.js"><link rel="prefetch" href="/assets/js/66.cfe06984.js"><link rel="prefetch" href="/assets/js/67.be17be93.js"><link rel="prefetch" href="/assets/js/68.6251952b.js"><link rel="prefetch" href="/assets/js/69.35ab58ca.js"><link rel="prefetch" href="/assets/js/7.3445630a.js"><link rel="prefetch" href="/assets/js/70.42fb218a.js"><link rel="prefetch" href="/assets/js/71.43690c3d.js"><link rel="prefetch" href="/assets/js/72.41e27b0b.js"><link rel="prefetch" href="/assets/js/73.fad27f7e.js"><link rel="prefetch" href="/assets/js/74.9e09628e.js"><link rel="prefetch" href="/assets/js/75.f1030a09.js"><link rel="prefetch" href="/assets/js/76.733e3e68.js"><link rel="prefetch" href="/assets/js/77.638ab4a9.js"><link rel="prefetch" href="/assets/js/78.e105f752.js"><link rel="prefetch" href="/assets/js/79.59f3ec5d.js"><link rel="prefetch" href="/assets/js/8.463fcb3e.js"><link rel="prefetch" href="/assets/js/80.78249975.js"><link rel="prefetch" href="/assets/js/81.24fc85b0.js"><link rel="prefetch" href="/assets/js/82.b5fae730.js"><link rel="prefetch" href="/assets/js/83.a9d5eae5.js"><link rel="prefetch" href="/assets/js/84.ecf273d4.js"><link rel="prefetch" href="/assets/js/85.3efaade9.js"><link rel="prefetch" href="/assets/js/86.1baee96a.js"><link rel="prefetch" href="/assets/js/87.1cb7b963.js"><link rel="prefetch" href="/assets/js/88.ae03d570.js"><link rel="prefetch" href="/assets/js/89.8d7bc923.js"><link rel="prefetch" href="/assets/js/9.ee731b79.js"><link rel="prefetch" href="/assets/js/90.c11dd8d6.js"><link rel="prefetch" href="/assets/js/91.29eca504.js"><link rel="prefetch" href="/assets/js/92.0c4bdb96.js"><link rel="prefetch" href="/assets/js/93.cf07ad60.js"><link rel="prefetch" href="/assets/js/94.dd536132.js"><link rel="prefetch" href="/assets/js/96.00afeac7.js"><link rel="prefetch" href="/assets/js/97.e79a48f3.js"><link rel="prefetch" href="/assets/js/98.03573ada.js"><link rel="prefetch" href="/assets/js/99.6dbf53b0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.6a41b040.css">
+  </head>
+  <body class="theme-mode-light">
+    <div id="app" data-server-rendered="true"><div class="theme-container sidebar-open have-rightmenu"><header class="navbar blur"><div title="目录" class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/img/logo.png" alt="Friedy's blog" class="logo"> <span class="site-name can-hide">Friedy's blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><a href="/web/" class="link-title">前端</a> <span class="title" style="display:none;">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/web/vue/" class="nav-link">《Vue》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/javascript/" class="nav-link">《JavaScript教程》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/wxmini/" class="nav-link">小程序笔记</a></li><li class="dropdown-item"><!----> <a href="/web/css/" class="nav-link">《CSS》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/html/" class="nav-link">《HTML》笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><a href="/back/" class="link-title">后端</a> <span class="title" style="display:none;">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/back/java/" class="nav-link">《Java》笔记</a></li><li class="dropdown-item"><!----> <a href="/back/springboot/" class="nav-link">《SpringBoot》笔记</a></li><li class="dropdown-item"><!----> <a href="/back/springcloud/" class="nav-link">《SpringCloud》笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="智算" class="dropdown-title"><a href="/tec/" class="link-title">智算</a> <span class="title" style="display:none;">智算</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tec/mlrecord/" class="nav-link">机器学习笔记</a></li><li class="dropdown-item"><!----> <a href="/tec/dlsummary/" class="nav-link">深度学习知识点总结</a></li><li class="dropdown-item"><!----> <a href="/tec/llmrecord/" class="nav-link">大模型学习笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="更多" class="dropdown-title"><a href="/more/" class="link-title">更多</a> <span class="title" style="display:none;">更多</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/interview/" class="nav-link">面试经验</a></li><li class="dropdown-item"><!----> <a href="/friends/" class="nav-link">友情链接</a></li></ul></div></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="收藏" class="dropdown-title"><a href="/pages/beb6c0bd8a66cea6/" class="link-title">收藏</a> <span class="title" style="display:none;">收藏</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/beb6c0bd8a66cea6/" class="nav-link">网站</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="索引" class="dropdown-title"><a href="/archives/" class="link-title">索引</a> <span class="title" style="display:none;">索引</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/" class="nav-link">分类</a></li><li class="dropdown-item"><!----> <a href="/tags/" class="nav-link">标签</a></li><li class="dropdown-item"><!----> <a href="/archives/" class="nav-link">归档</a></li></ul></div></div> <a href="https://github.com/friedy37/friedy37.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar-hover-trigger"></div> <aside class="sidebar" style="display:none;"><div class="blogger"><img src="https://jsd.cdn.zzko.cn/gh/friedy37/picgo/127.jpeg"> <div class="blogger-info"><h3>Friedy</h3> <span>全栈攻城狮</span></div></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><a href="/web/" class="link-title">前端</a> <span class="title" style="display:none;">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/web/vue/" class="nav-link">《Vue》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/javascript/" class="nav-link">《JavaScript教程》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/wxmini/" class="nav-link">小程序笔记</a></li><li class="dropdown-item"><!----> <a href="/web/css/" class="nav-link">《CSS》笔记</a></li><li class="dropdown-item"><!----> <a href="/web/html/" class="nav-link">《HTML》笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><a href="/back/" class="link-title">后端</a> <span class="title" style="display:none;">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/back/java/" class="nav-link">《Java》笔记</a></li><li class="dropdown-item"><!----> <a href="/back/springboot/" class="nav-link">《SpringBoot》笔记</a></li><li class="dropdown-item"><!----> <a href="/back/springcloud/" class="nav-link">《SpringCloud》笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="智算" class="dropdown-title"><a href="/tec/" class="link-title">智算</a> <span class="title" style="display:none;">智算</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tec/mlrecord/" class="nav-link">机器学习笔记</a></li><li class="dropdown-item"><!----> <a href="/tec/dlsummary/" class="nav-link">深度学习知识点总结</a></li><li class="dropdown-item"><!----> <a href="/tec/llmrecord/" class="nav-link">大模型学习笔记</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="更多" class="dropdown-title"><a href="/more/" class="link-title">更多</a> <span class="title" style="display:none;">更多</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/interview/" class="nav-link">面试经验</a></li><li class="dropdown-item"><!----> <a href="/friends/" class="nav-link">友情链接</a></li></ul></div></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="收藏" class="dropdown-title"><a href="/pages/beb6c0bd8a66cea6/" class="link-title">收藏</a> <span class="title" style="display:none;">收藏</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/beb6c0bd8a66cea6/" class="nav-link">网站</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="索引" class="dropdown-title"><a href="/archives/" class="link-title">索引</a> <span class="title" style="display:none;">索引</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/" class="nav-link">分类</a></li><li class="dropdown-item"><!----> <a href="/tags/" class="nav-link">标签</a></li><li class="dropdown-item"><!----> <a href="/archives/" class="nav-link">归档</a></li></ul></div></div> <a href="https://github.com/friedy37/friedy37.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/pages/b7196d/" aria-current="page" class="active sidebar-link">SpringCloud入门概述</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header level2"><a href="/pages/b7196d/#_1-springcloud-入门概述" class="sidebar-link">1. SpringCloud 入门概述</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header level3"><a href="/pages/b7196d/#_1-1-springcloud-是什么" class="sidebar-link">1.1 SpringCloud 是什么？</a></li><li class="sidebar-sub-header level3"><a href="/pages/b7196d/#_1-2-springcloud-和-springboot-的关系" class="sidebar-link">1.2 SpringCloud 和 SpringBoot 的关系</a></li><li class="sidebar-sub-header level3"><a href="/pages/b7196d/#_1-3-springcloud-rest-学习环境搭建-服务提供者与消费者" class="sidebar-link">1.3 SpringCloud Rest 学习环境搭建: 服务提供者与消费者</a></li><li class="sidebar-sub-header level4"><a href="/pages/b7196d/#_1-3-1-新建一个空的-maven-项目-管理依赖" class="sidebar-link">1.3.1 新建一个空的 maven 项目，管理依赖</a></li><li class="sidebar-sub-header level4"><a href="/pages/b7196d/#_1-3-2-新建一个-moudle-springcloud-api-主要负责实体类" class="sidebar-link">1.3.2 新建一个 moudle（springcloud-api），主要负责实体类</a></li><li class="sidebar-sub-header level4"><a href="/pages/b7196d/#_1-3-3-新建一个-module-springcloud-provider-dept-8001-作为服务提供者-pom-xml" class="sidebar-link">1.3.3 新建一个 module（springcloud-provider-dept-8001），作为服务提供者  pom.xml</a></li><li class="sidebar-sub-header level4"><a href="/pages/b7196d/#_1-3-4-新建一个-module-springcloud-consumer-dept-80-作为服务消费者" class="sidebar-link">1.3.4 新建一个 module（springcloud-consumer-dept-80），作为服务消费者</a></li><li class="sidebar-sub-header level4"><a href="/pages/b7196d/#_1-3-5-测试" class="sidebar-link">1.3.5 测试</a></li></ul></li></ul></li><li><a href="/pages/f64dfe/" class="sidebar-link">Eureka服务发现框架</a></li><li><a href="/pages/cb337d/" class="sidebar-link">Ribbon：负载均衡（基于客户端）</a></li><li><a href="/pages/9e327d/" class="sidebar-link">Feign：负载均衡（基于客户端）</a></li><li><a href="/pages/417a3f/" class="sidebar-link">Hystrix：断路器</a></li><li><a href="/pages/4c0a8e/" class="sidebar-link">Zuul路由网关</a></li><li><a href="/pages/2601e8/" class="sidebar-link">SpringCloud Config分布式配置</a></li><li><a href="/pages/b23d18/" class="sidebar-link">总结</a></li></ul> </aside> <div><main class="page"><div class="theme-vdoing-wrapper "><div class="articleInfo-wrap" data-v-06225672><div class="articleInfo" data-v-06225672><ul class="breadcrumbs" data-v-06225672><li data-v-06225672><a href="/" title="首页" class="iconfont icon-home router-link-active" data-v-06225672></a></li> <li data-v-06225672><a href="/back/springcloud/#《SpringCloud》笔记" data-v-06225672>《SpringCloud》笔记</a></li></ul> <div class="info" data-v-06225672><div title="作者" class="author iconfont icon-touxiang" data-v-06225672><a href="https://github.com/friedy37" target="_blank" title="作者" class="beLink" data-v-06225672>friedy37</a></div> <div title="创建时间" class="date iconfont icon-riqi" data-v-06225672><a href="javascript:;" data-v-06225672>2024-06-08</a></div> <!----></div></div></div> <!----> <div class="content-wrapper"><div class="right-menu-wrapper"><div class="right-menu-margin"><div class="right-menu-title">目录</div> <div class="right-menu-content"></div></div></div> <h1><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAABH1JREFUSA3tVl1oHFUUPmdmd2ltklqbpJDiNnXFmgbFktho7YMPNiJSSZM0+CAYSkUELVhM6YuwIPpgoOKDqOBDC0XE2CQoNtQXBUFTTcCi+Wlh1V2TQExsUzcltd3M9Tt3ZjZzZ2fT+OJTL8yeM+eee757fmeJbq//KQL8X3DUSFOcfr7cRsRtxNQMWueeVzOkaITIGqQHNg5y8+jNW9ldM7A6nTpAjuolUikAwq7CE3WcM2RRDz+XGVgN3FptU/aUSlvq9Pa3iZ1+sgAqJyyAFqkipd9dqiwHF3P65YycLWc/6sqGrvoEoIp6DOFaX5h6+dnfjkWprwqsPk0dUGq5vySwDImC10KxFHgGL1SWoc92O3eVht09qdXNH11I2SsTsJYqMWzihqGMi+A+Garf3BAuuLI5oGlULyNfyB/HYNujwktOfRrMr5t77NmevqaUopx0grnKAyvVpmwUDB4x6FPXuGvYLTDwWsejwgtgkYKPqRJg8SV6xaiZ3ZTppGneS4yfH5/66fZSDHv+QZci/+h5c5UHtpy67JUqGppM0sh0Nc1dW6/N1W5Yoqat8/TU/VnadmdeW2PLLSyh0cvxBs3KbqTmwYPpxN4do/mzE8nEpvX/UMu2Wbp74zUAK5q6WkHns7V0eWkdPbPzd3rxkTGybadYySumVzhcaJFbs5UrEkQ/+CK8gF5dnh/6ciIZ73gwQ927L1IitoxKLXYP3SjYdOrHHfTZhRRlFyrorafPk20B3HPD1y2G3qKZME5Jcf3t/HUC13/8tSd++vqFveMUTwAUxSUFI1QekR1+bIze3D9MF2aq6cPvG72CgnldWCFqyRw3lwH8ZMerjTD9ElRO7Gv44wNpC90aASqGfVlz/Rx17srQ57/UU26hkhQqUB7dBR71WmzQhHUnblGmVOEw0jhbV1n9OlXUDCIRGaNV5Jp43N516fN7JmnTHdfp7Hgy0luO4aMhtkLL8Bi3bUWYvzh5Mn1dTxrL6QmGuRhGL/TiTTxRoEdTszSaq9GR0NGA3KdkOz3hqSV3MIDhQ5IVX/Ivx3umBti2es2h4eZby7x8br1rkf7Mo90AqC8aQ3sJeNzqFRu+vSANAQe3PL7l0HGOAdwDCeZYvNKeoZp1Qfs6Aipndh86HmFRi0LAnEO47wsqM6cdfjh3jBPUzhZy7nvlUfFsamED1VQt6aISHVymXZ/B2aCtIG8AI8xfobj2d3en1wWVhOeHELKmLQ1s211s88comkv4UCwWyF787mJdYXtNfhKAXVqnKTq8QZvGAGGOfaTo5pGZ/PwbUCr5+DPr/1J92JNHr9aOl/F3iI5+O1nfybsGxoimvZ3ViWSluDITw3P37mypheDIPY0tw7+O/5ApbkYw+zpfaUVu32Pi98+defdUhEpZkRFq0aqyNh9FuL9hpYbEm6iwi0z2REd09ZmyENEbuhjDWzKvZXTqKYaBIr3tt5kuPtQBZFvEUwHt60vfCNu41XsksH9Ij1BMMz1Y0OOunHNShFIP5868g5zeXmuLwL9T4b6Q2+KejgAAAABJRU5ErkJggg==">SpringCloud入门概述<!----></h1>  <div class="theme-vdoing-content content__default"><h2 id="_1-springcloud-入门概述"><a href="#_1-springcloud-入门概述" class="header-anchor">#</a> 1. SpringCloud 入门概述</h2> <h3 id="_1-1-springcloud-是什么"><a href="#_1-1-springcloud-是什么" class="header-anchor">#</a> 1.1 SpringCloud 是什么？</h3> <p><strong>Spring Cloud 是一系列框架的有序集合</strong>。它<strong>利用 Spring Boot</strong> 的开发便利性巧妙地<strong>简化了分布式系统基础设施的开发</strong>，如<strong>服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等</strong>，都可以用 Spring Boot 的开发风格做到一键启动和部署。Spring Cloud 并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过 Spring Boot 风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。</p> <h3 id="_1-2-springcloud-和-springboot-的关系"><a href="#_1-2-springcloud-和-springboot-的关系" class="header-anchor">#</a> 1.2 SpringCloud 和 SpringBoot 的关系</h3> <ul><li>SpringBoot 专注于方便的开发单个个体微服务；</li> <li>SpringCloud 是关注全局的微服务协调整理治理框架，它将 SpringBoot 开发的一个个单体微服务，整合并管理起来，为各个微服务之间提供：配置管理、服务发现、断路器、路由、为代理、事件总栈、全局锁、决策竞选、分布式会话等等集成服务；</li> <li>SpringBoot 可以离开 SpringCloud 独立使用，开发项目，但 SpringCloud 离不开 SpringBoot，属于依赖关系；</li></ul> <p>总结：SpringBoot 专注于快速、方便的开发单个个体微服务，SpringCloud 关注全局的服务治理框架；</p> <h3 id="_1-3-springcloud-rest-学习环境搭建-服务提供者与消费者"><a href="#_1-3-springcloud-rest-学习环境搭建-服务提供者与消费者" class="header-anchor">#</a> 1.3 SpringCloud Rest 学习环境搭建: 服务提供者与消费者</h3> <h4 id="_1-3-1-新建一个空的-maven-项目-管理依赖"><a href="#_1-3-1-新建一个空的-maven-项目-管理依赖" class="header-anchor">#</a> 1.3.1 新建一个空的 maven 项目，管理依赖</h4> <p>pom.xml</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;org.example&lt;/groupId&gt;
+    &lt;artifactId&gt;springcloud&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;modules&gt;
+        &lt;module&gt;springcloud-api&lt;/module&gt;
+        &lt;module&gt;springcloud-provider-dept-8001&lt;/module&gt;
+        &lt;module&gt;springcloud-consumer-dept-80&lt;/module&gt;
+    &lt;/modules&gt;
+
+    &lt;!--打包方式--&gt;
+    &lt;packaging&gt;pom&lt;/packaging&gt;
+
+    &lt;!--管理版本号--&gt;
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+        &lt;junit.version&gt;4.12&lt;/junit.version&gt;
+        &lt;log4j.version&gt;1.2.17&lt;/log4j.version&gt;
+        &lt;lombok.version&gt;1.16.18&lt;/lombok.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;!--springCloud的依赖--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;Greenwich.SR1&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+            &lt;!--SpringBoot--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;2.1.4.RELEASE&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+            &lt;!--数据库--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;mysql&lt;/groupId&gt;
+                &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+                &lt;version&gt;5.1.47&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+                &lt;artifactId&gt;druid&lt;/artifactId&gt;
+                &lt;version&gt;1.1.10&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;!--SpringBoot 启动器--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+                &lt;version&gt;1.3.2&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;!--日志测试--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+                &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
+                &lt;version&gt;1.2.3&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;log4j&lt;/groupId&gt;
+                &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+                &lt;version&gt;${log4j.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;!--单元测试~--&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;junit&lt;/groupId&gt;
+                &lt;artifactId&gt;junit&lt;/artifactId&gt;
+                &lt;version&gt;${junit.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+                &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+                &lt;version&gt;${lombok.version}&lt;/version&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+&lt;/project&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br></div></div><h4 id="_1-3-2-新建一个-moudle-springcloud-api-主要负责实体类"><a href="#_1-3-2-新建一个-moudle-springcloud-api-主要负责实体类" class="header-anchor">#</a> 1.3.2 新建一个 moudle（springcloud-api），主要负责实体类</h4> <p>pom.xml</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;!--当前moudle自己需要的依赖，如果父依赖中有，则不需要写版本号，直接使用父依赖中的--&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+        &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>Dept .java</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>package com.kuang.pojo;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+
+//必须实现序列化接口！
+@Data
+@NoArgsConstructor
+@Accessors(chain = true) //链式写法
+public class Dept implements Serializable {
+    private Long deptno;
+    private String dname;
+    private String db_source;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h4 id="_1-3-3-新建一个-module-springcloud-provider-dept-8001-作为服务提供者-pom-xml"><a href="#_1-3-3-新建一个-module-springcloud-provider-dept-8001-作为服务提供者-pom-xml" class="header-anchor">#</a> 1.3.3 新建一个 module（springcloud-provider-dept-8001），作为服务提供者  pom.xml</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;dependencies&gt;
+    &lt;!--需要实体类，导入pom--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.example&lt;/groupId&gt;
+        &lt;artifactId&gt;springcloud-api&lt;/artifactId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+        &lt;artifactId&gt;druid&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+        &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;!--热部署--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br></div></div><p>application.yml</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>server:
+  port: 8001
+
+mybatis:
+  type-aliases-package: com.kuang.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+
+
+spring:
+  application:
+    name: springcloud-provider-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://localhost:3306/db_01?useUnicode=true&amp;characterEncoding=utf-8
+    username: root
+    password: 123456
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>DeptDao 接口</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>package com.kuang.springcloud.dao;
+
+import com.kuang.pojo.Dept;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Mapper
+@Repository
+public interface DeptDao {
+
+    public boolean addDept(Dept dept);
+
+    public Dept queryById(Long id);
+
+    public List&lt;Dept&gt; queryAll();
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>DeptMapper.xml</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.kuang.springcloud.dao.DeptDao&quot;&gt;
+
+    &lt;select id=&quot;queryById&quot; parameterType=&quot;long&quot; resultType=&quot;dept&quot;&gt;
+        select * from dept where deptno=#{deptno};
+    &lt;/select&gt;
+
+    &lt;select id=&quot;queryAll&quot; resultType=&quot;dept&quot;&gt;
+        select * from dept;
+    &lt;/select&gt;
+
+    &lt;insert id=&quot;addDept&quot; parameterType=&quot;dept&quot;&gt;
+        insert into dept(dname,db_source) values (#{dname},database());
+    &lt;/insert&gt;
+&lt;/mapper&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>service 层略</p> <p>DeptController</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>package com.kuang.springcloud.controller;
+
+import com.kuang.pojo.Dept;
+import com.kuang.springcloud.service.DeptService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+public class DeptController {
+
+    @Autowired
+    private DeptService deptService;
+
+    @PostMapping(&quot;/dept/add&quot;)
+    public boolean addDept(Dept dept){
+        return  deptService.addDept(dept);
+    }
+
+    @GetMapping(&quot;/dept/get/{id}&quot;)
+    public Dept queryById(@PathVariable(&quot;id&quot;) Long id){
+        return deptService.queryById(id);
+    }
+
+    @GetMapping(&quot;/dept/list&quot;)
+    public List&lt;Dept&gt; queryAll(){
+        return deptService.queryAll();
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><p>最后创建启动类，测试。</p> <h4 id="_1-3-4-新建一个-module-springcloud-consumer-dept-80-作为服务消费者"><a href="#_1-3-4-新建一个-module-springcloud-consumer-dept-80-作为服务消费者" class="header-anchor">#</a> 1.3.4 新建一个 module（springcloud-consumer-dept-80），作为服务消费者</h4> <p>pom.xml</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.example&lt;/groupId&gt;
+        &lt;artifactId&gt;springcloud-api&lt;/artifactId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>application.yml</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>server:
+  port: 80
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>ConfigBean</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>package com.kuang.springcloud.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
+
+@Configuration
+public class ConfigBean {
+
+    @Bean
+    public RestTemplate getRestTemplate(){
+        return new RestTemplate();
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>DeptConsumerController</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>package com.kuang.springcloud.controller;
+
+import com.kuang.pojo.Dept;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+
+@RestController
+public class DeptConsumerController {
+
+    /**
+     * 理解：消费者，不应该有service层,而应该通过url调提供者的控制器
+     * RestTemplate .... 源码中未注册到容器中，需要手动注入
+     * (地址：url, 实体：Map ,Class&lt;T&gt; responseType)
+     * &lt;p&gt;
+     * 提供多种便捷访问远程http服务的方法，简单的Restful服务模板~
+     */
+    @Autowired
+    RestTemplate restTemplate;
+
+    private static final String REST_URL_PREFIX =&quot;http://localhost:8001&quot;;
+
+    @RequestMapping(&quot;/consumer/dept/add&quot;)
+    public boolean add(Dept dept){
+        // postForObject(服务提供方地址(接口),参数实体,返回类型.class)
+        return restTemplate.postForObject(REST_URL_PREFIX+&quot;/dept/add&quot;,dept,Boolean.class);
+    }
+
+    @RequestMapping(&quot;/consumer/dept/get/{id}&quot;)
+    public Dept queryById(@PathVariable(&quot;id&quot;) Long id){
+        // getForObject(服务提供方地址(接口),返回类型.class)
+        return  restTemplate.getForObject(REST_URL_PREFIX+&quot;/dept/get/&quot;+id,Dept.class);
+    }
+
+    @RequestMapping(&quot;/consumer/dept/list&quot;)
+    public List&lt;Dept&gt; list(){
+        return restTemplate.getForObject(REST_URL_PREFIX+&quot;/dept/list&quot;,List.class);
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br></div></div><p>编写启动类</p> <h4 id="_1-3-5-测试"><a href="#_1-3-5-测试" class="header-anchor">#</a> 1.3.5 测试</h4> <p>项目结构图<br> <img src="https://img-blog.csdnimg.cn/20210412214643906.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjY1NzQ1,size_16,color_FFFFFF,t_70" alt=""><br>
+源</p></div></div>  <div class="page-edit"><div class="edit-link"><a href="https://github.com/friedy37/friedy37.github.io/edit/master/docs/《SpringCloud》笔记/01.SpringCloud入门概述.md" target="_blank" rel="noopener noreferrer">编辑</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="tags"><a href="/tags/?tag=SpringCloud" title="标签">#SpringCloud</a></div> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2024/06/09, 21:19:54</span></div></div> <div class="page-nav-wapper"><div class="page-nav-centre-wrap"><!----> <a href="/pages/f64dfe/" class="page-nav-centre page-nav-centre-next"><div class="tooltip">Eureka服务发现框架</div></a></div> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/pages/f64dfe/">Eureka服务发现框架</a>→
+      </span></p></div></div></div> <div class="article-list"><div class="article-title"><a href="/archives/" class="iconfont icon-bi">最近更新</a></div> <div class="article-wrapper"><dl><dd>01</dd> <dt><a href="/pages/c63688/"><div>
+            大模型学习笔记
+            <!----></div></a> <span class="date">11-29</span></dt></dl><dl><dd>02</dd> <dt><a href="/pages/f11edc/"><div>
+            机器学习笔记
+            <!----></div></a> <span class="date">11-29</span></dt></dl><dl><dd>03</dd> <dt><a href="/pages/a616ef/"><div>
+            深度学习知识点总结
+            <!----></div></a> <span class="date">11-22</span></dt></dl> <dl><dd></dd> <dt><a href="/archives/" class="more">更多文章&gt;</a></dt></dl></div></div></main></div> <div class="footer"><div class="icons"><a href="mailto:276970215@qq.com" title="发邮件" target="_blank" class="iconfont icon-youjian"></a><a href="https://github.com/friedy37" title="GitHub" target="_blank" class="iconfont icon-github"></a><a href="https://music.163.com/" title="听音乐" target="_blank" class="iconfont icon-erji"></a></div> 
+  Theme by
+  <a href="https://github.com/xugaoyi/vuepress-theme-vdoing" target="_blank" title="本站主题">Vdoing</a> 
+    | Copyright © 2019-2024
+    <span>Evan Xu | <a href="https://github.com/friedy37/vuepress-theme-vdoing/blob/master/LICENSE" target="_blank">MIT License</a></span></div> <div class="buttons"><div title="返回顶部" class="button blur go-to-top iconfont icon-fanhuidingbu" style="display:none;"></div> <div title="去评论" class="button blur go-to-comment iconfont icon-pinglun" style="display:none;"></div> <div title="主题模式" class="button blur theme-mode-but iconfont icon-zhuti"><ul class="select-box" style="display:none;"><li class="iconfont icon-zidong">
+          跟随系统
+        </li><li class="iconfont icon-rijianmoshi">
+          浅色模式
+        </li><li class="iconfont icon-yejianmoshi">
+          深色模式
+        </li><li class="iconfont icon-yuedu">
+          阅读模式
+        </li></ul></div></div> <!----> <!----> <!----></div><div class="global-ui"><div></div></div></div>
+    <script src="/assets/js/app.a9f1a96e.js" defer></script><script src="/assets/js/2.ef8d47f0.js" defer></script><script src="/assets/js/95.a3f210fe.js" defer></script>
+  </body>
+</html>
