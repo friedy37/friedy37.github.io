@@ -54,9 +54,9 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         text: '智算',
         link: '/tec/',
         items: [
-          { text: '《Git》笔记', link: '/tec/git/'},
-          { text: 'GitHub技巧', link: '/tec/github/'},
-          { text: '技术文档', link: '/tec/tecdocs/'},
+          { text: '机器学习笔记', link: '/tec/mlrecord/'},
+          { text: '深度学习知识点总结', link: '/tec/dlsummary/'},
+          { text: '大模型学习笔记', link: '/tec/llmrecord/'},
         ],
       },
       {
